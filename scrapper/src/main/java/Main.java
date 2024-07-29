@@ -1,15 +1,36 @@
-import models.DataToScrap;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import models.ProductResponse;
 import websites.Scrapper;
 
 public class Main {
     public static void main(String[] args) {
-        DataToScrap[] dataToScraps = {
-                new DataToScrap("Stragier", "Calicot Uni Blanc","https://www.stragier.com/fr/article/298069/calicot-coton-souple-uni-blanc", "/html/body/form/div[4]/div[1]/div[6]/div/div[3]/div[2]/span[2]"),
-                new DataToScrap("Verotex", "Calicot Uni Blanc","https://verotex.be/en/products/tissu-calicot", "/html/body/main/section[1]/div/product-rerender/div/safe-sticky/div[3]/div/div/price-list/sale-price")
-        };
-        for (DataToScrap dataToScrap : dataToScraps) {
-            System.out.println(dataToScrap);
-            System.out.println(new Scrapper(dataToScrap).scrap());
+        try {
+            List<ProductResponse> products = fetchProducts();
+            for (ProductResponse product : products) {
+                System.out.println(new Scrapper(product).scrap());
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
+    }
+
+    private static List<ProductResponse> fetchProducts() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/products"))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(response.body(), new TypeReference<List<ProductResponse>>() {});
     }
 }

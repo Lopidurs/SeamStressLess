@@ -1,6 +1,6 @@
 package websites;
 
-import models.DataToScrap;
+import models.ProductResponse;
 import models.ScrappedData;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlElement;
@@ -12,22 +12,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Scrapper {
-    private final DataToScrap dataToScrap;
+    private final ProductResponse product;
     protected HtmlPage page;
-    public Scrapper(DataToScrap dataToScrap) {
-        this.dataToScrap = dataToScrap;
+    public Scrapper(ProductResponse product) {
+        this.product = product;
+        System.out.println(product.getUrl());
         try (final WebClient webClient = new WebClient()) {
             webClient.getOptions().setCssEnabled(false);
             webClient.getOptions().setJavaScriptEnabled(false);
-            page = webClient.getPage(dataToScrap.url());
+            page = webClient.getPage(product.getUrl());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public final ScrappedData scrap(){
-        HtmlElement element = page.getFirstByXPath(dataToScrap.xPathPrice());
-        return new ScrappedData(dataToScrap.website(), dataToScrap.product(), parsePrice(element.asNormalizedText()), dataToScrap.url(), LocalDateTime.now());
+        HtmlElement element = page.getFirstByXPath(product.getXpathPrice());
+        return new ScrappedData(product.getCategory().getName(), parsePrice(element.asNormalizedText()), product.getUrl(), LocalDateTime.now());
     };
 
     private static double parsePrice(String priceStr) {
