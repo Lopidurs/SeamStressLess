@@ -7,16 +7,16 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import models.ProductResponse;
+import models.ScrappedData;
 import websites.Scrapper;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            List<ProductResponse> products = fetchProducts();
-            for (ProductResponse product : products) {
-                System.out.println(new Scrapper(product).scrap());
-            }
+            List<ScrappedData> scrappedData = fetchProducts().stream().map(product -> new Scrapper(product).scrap()).toList();
+            postScrappedData(scrappedData);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -31,6 +31,22 @@ public class Main {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(response.body(), new TypeReference<List<ProductResponse>>() {});
+        mapper.registerModule(new JavaTimeModule());
+        return mapper.readValue(response.body(), new TypeReference<>() {
+        });
+    }
+
+    private static void postScrappedData(List<ScrappedData> scrappedData) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/price-records"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(scrappedData)))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
     }
 }

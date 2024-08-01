@@ -28,7 +28,7 @@ public class Scrapper {
 
     public final ScrappedData scrap(){
         HtmlElement element = page.getFirstByXPath(product.getXpathPrice());
-        return new ScrappedData(product.getCategory().getName(), parsePrice(element.asNormalizedText()), product.getUrl(), LocalDateTime.now());
+        return new ScrappedData(product.getId(), parsePrice(element.asNormalizedText()), LocalDateTime.now());
     };
 
     private static double parsePrice(String priceStr) {
