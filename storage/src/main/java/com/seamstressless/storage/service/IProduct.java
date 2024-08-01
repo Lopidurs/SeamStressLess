@@ -1,6 +1,6 @@
 package com.seamstressless.storage.service;
 
-import com.seamstressless.storage.dto.Product.ProductRes;
+import com.seamstressless.storage.utils.dto.Product.ProductRes;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.seamstressless.storage.dto.Product;
+package com.seamstressless.storage.utils.dto.Product;
 
-import com.seamstressless.storage.dto.ProductCategory.ProductCategoryRes;
+import com.seamstressless.storage.utils.dto.ProductCategory.ProductCategoryRes;
 
 public interface ProductRes {
     Long getId();

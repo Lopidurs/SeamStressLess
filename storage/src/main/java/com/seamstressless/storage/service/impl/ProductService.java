@@ -1,7 +1,8 @@
-package com.seamstressless.storage.service;
+package com.seamstressless.storage.service.impl;
 
-import com.seamstressless.storage.dto.Product.ProductRes;
+import com.seamstressless.storage.utils.dto.Product.ProductRes;
 import com.seamstressless.storage.repository.ProductRepo;
+import com.seamstressless.storage.service.IProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ public class ProductService implements IProduct {
 
         @Override
         public List<ProductRes> getAllProducts() {
-            System.out.println(productRepo.findAll());
             return productRepo.findAllProduct();
         }
 }
