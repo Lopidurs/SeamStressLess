@@ -1,0 +1,21 @@
+.side-nav {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+
+  .side-nav-content {
+    padding: 0;
+
+    .side-nav-item {
+      cursor: pointer;
+    }
+
+    .side-nav-item:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
