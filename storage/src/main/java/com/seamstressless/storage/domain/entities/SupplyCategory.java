@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "products_categories")
-public class ProductCategory extends BaseEntity<Long> {
+@Table(name = "supplies_categories")
+public class SupplyCategory extends BaseEntity<Long> {
 
     @Column(name = "name", nullable = false)
     private String name;

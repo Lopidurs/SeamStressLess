@@ -23,6 +23,6 @@ public class PriceRecord extends BaseEntity<Long>{
     private LocalDateTime priceAt;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @JoinColumn(name = "supply_id", nullable = false)
+    private Supply supply;
 }

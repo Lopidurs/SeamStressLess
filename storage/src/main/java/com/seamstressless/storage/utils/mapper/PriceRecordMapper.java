@@ -1,7 +1,7 @@
 package com.seamstressless.storage.utils.mapper;
 
 import com.seamstressless.storage.domain.entities.PriceRecord;
-import com.seamstressless.storage.repository.ProductRepo;
+import com.seamstressless.storage.repository.SupplyRepo;
 import com.seamstressless.storage.utils.dto.PriceRecord.PriceRecordReq;
 import com.seamstressless.storage.utils.dto.PriceRecord.PriceRecordRes;
 import lombok.RequiredArgsConstructor;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class PriceRecordMapper {
-    private final ProductRepo productRepo;
+    private final SupplyRepo supplyRepo;
 
     public PriceRecord toEntity(PriceRecordReq priceRecordReq) {
         return new PriceRecord(
                 priceRecordReq.price(),
                 priceRecordReq.priceAt(),
-                productRepo.findById(priceRecordReq.productId())
+                supplyRepo.findById(priceRecordReq.supplyId())
                         .orElseThrow(() -> new IllegalArgumentException("Product not found"))
         );
     }
@@ -26,7 +26,7 @@ public class PriceRecordMapper {
                 priceRecord.getId(),
                 priceRecord.getPrice(),
                 priceRecord.getPriceAt(),
-                priceRecord.getProduct().getId()
+                priceRecord.getSupply().getId()
         );
     }
 }

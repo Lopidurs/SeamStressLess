@@ -1,0 +1,3 @@
+@for (supplyCategory of supplyCategories$ | async ; track supplyCategory.id) {
+  <p>{{ supplyCategory.name }}</p>
+}

@@ -9,5 +9,5 @@ public record PriceRecordReq (
     @NotNull
     LocalDateTime priceAt,
     @NotNull
-    Long productId
+    Long supplyId
 ) {}

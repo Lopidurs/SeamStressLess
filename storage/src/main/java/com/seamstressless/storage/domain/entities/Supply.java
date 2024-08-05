@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "products")
-public class Product extends BaseEntity<Long> {
+@Table(name = "supplies")
+public class Supply extends BaseEntity<Long> {
 
     @Column(name = "URL", nullable = false)
     private String URL;
@@ -22,5 +22,5 @@ public class Product extends BaseEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private ProductCategory category;
+    private SupplyCategory category;
 }

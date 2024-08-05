@@ -1,7 +1,7 @@
 package com.seamstressless.storage.datainitializer;
 
-import com.seamstressless.storage.domain.entities.ProductCategory;
-import com.seamstressless.storage.repository.ProductCategoryRepo;
+import com.seamstressless.storage.domain.entities.SupplyCategory;
+import com.seamstressless.storage.repository.SupplyCategoryRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -14,19 +14,19 @@ import java.util.List;
 @Order(1)
 public class ProductCategoryInit implements CommandLineRunner {
 
-    private final ProductCategoryRepo productCategoryRepo;
+    private final SupplyCategoryRepo supplyCategoryRepo;
 
 
     @Override
     public void run(String... args) throws Exception {
-        List<ProductCategory> productCategories = List.of(
-                new ProductCategory("Calicot blanc"),
-                new ProductCategory("Cotton rouge"),
-                new ProductCategory("Cottton bleu"),
-                new ProductCategory("Tirettes")
+        List<SupplyCategory> productCategories = List.of(
+                new SupplyCategory("Calicot blanc"),
+                new SupplyCategory("Cotton rouge"),
+                new SupplyCategory("Cottton bleu"),
+                new SupplyCategory("Tirettes")
         );
 
-        productCategoryRepo.saveAll(productCategories);
+        supplyCategoryRepo.saveAll(productCategories);
 
     }
 }

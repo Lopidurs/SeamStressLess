@@ -1,17 +1,17 @@
 package com.seamstressless.storage.service;
 
-import com.seamstressless.storage.utils.dto.Product.ProductRes;
+import com.seamstressless.storage.utils.dto.Supply.SupplyRes;
 
 import java.util.List;
 
 /**
  * Service interface for product
  */
-public interface IProduct {
+public interface ISupply {
 
     /**
      * Get all products
      * @return list of products
      */
-    List<ProductRes> getAllProducts();
+    List<SupplyRes> getAllSupplies();
 }
