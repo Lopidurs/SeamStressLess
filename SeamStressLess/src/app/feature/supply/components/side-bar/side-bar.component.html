@@ -1,0 +1,9 @@
+<mat-card class="side-nav">
+  <mat-card-content class="side-nav-content">
+    @for (supplyCategory of supplyCategories$ | async ; track supplyCategory.id ) {
+      <mat-card appearance="outlined" class="side-nav-item">
+        <mat-card-content>{{ supplyCategory.name }}</mat-card-content>
+      </mat-card>
+    }
+  </mat-card-content>
+</mat-card>

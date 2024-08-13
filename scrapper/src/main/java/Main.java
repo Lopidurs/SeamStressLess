@@ -8,7 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import models.ProductResponse;
+import com.seamstressless.storage.utils.dto.Supply.SupplyRes;
 import models.ScrappedData;
 import websites.Scrapper;
 
@@ -22,10 +22,10 @@ public class Main {
         }
     }
 
-    private static List<ProductResponse> fetchProducts() throws IOException, InterruptedException {
+    private static List<SupplyRes> fetchProducts() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/products"))
+                .uri(URI.create("http://localhost:8080/supplies"))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

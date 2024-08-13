@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Order(1)
-public class ProductCategoryInit implements CommandLineRunner {
+public class SupplyCategoryInit implements CommandLineRunner {
 
     private final SupplyCategoryRepo supplyCategoryRepo;
 

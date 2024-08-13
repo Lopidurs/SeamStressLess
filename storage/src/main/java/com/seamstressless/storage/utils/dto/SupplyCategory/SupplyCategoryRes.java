@@ -1,6 +1,6 @@
 package com.seamstressless.storage.utils.dto.SupplyCategory;
 
-public interface SupplyCategoryRes {
-    Long getId();
-    String getName();
-}
+public record SupplyCategoryRes (
+    Long id,
+    String name
+) {}

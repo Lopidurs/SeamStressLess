@@ -1,0 +1,3 @@
+@for (supply of supplies$ | async ; track supply.id) {
+  <app-supply-card [supply]="supply"/>
+}

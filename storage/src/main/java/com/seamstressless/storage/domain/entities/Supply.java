@@ -14,10 +14,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "supplies")
 public class Supply extends BaseEntity<Long> {
 
-    @Column(name = "URL", nullable = false)
+    @Column(name = "url", nullable = false)
     private String URL;
 
-    @Column(name = "xPathPrice", nullable = false)
+    @Column(name = "store_name", nullable = false)
+    private String storeName;
+
+    @Column(name = "x_path_price", nullable = false)
     private String xPathPrice;
 
     @ManyToOne

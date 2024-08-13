@@ -6,6 +6,7 @@ import com.seamstressless.storage.service.ISupply;
 import com.seamstressless.storage.utils.dto.SupplyCategory.SupplyCategoryRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +28,10 @@ public class SupplyCont {
     @GetMapping("/categories")
     public List<SupplyCategoryRes> getAllSupplyCategories() {
         return supplyCategoryService.getAllSupplyCategories();
+    }
+
+    @GetMapping("/{categoryId}")
+    public List<SupplyRes> getAllSuppliesByCategory(@PathVariable Long categoryId) {
+        return supplyService.getAllSuppliesByCategory(categoryId);
     }
 }

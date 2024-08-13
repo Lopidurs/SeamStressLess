@@ -1,6 +1,6 @@
 package websites;
 
-import models.ProductResponse;
+import com.seamstressless.storage.utils.dto.Supply.SupplyRes;
 import models.ScrappedData;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlElement;
@@ -12,23 +12,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Scrapper {
-    private final ProductResponse product;
+    private final SupplyRes product;
     protected HtmlPage page;
-    public Scrapper(ProductResponse product) {
+    public Scrapper(SupplyRes product) {
         this.product = product;
-        System.out.println(product.getUrl());
+        System.out.println(product.URL());
         try (final WebClient webClient = new WebClient()) {
             webClient.getOptions().setCssEnabled(false);
             webClient.getOptions().setJavaScriptEnabled(false);
-            page = webClient.getPage(product.getUrl());
+            page = webClient.getPage(product.URL());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public final ScrappedData scrap(){
-        HtmlElement element = page.getFirstByXPath(product.getXpathPrice());
-        return new ScrappedData(product.getId(), parsePrice(element.asNormalizedText()), LocalDateTime.now());
+        HtmlElement element = page.getFirstByXPath(product.xPathPrice());
+        return new ScrappedData(product.id(), parsePrice(element.asNormalizedText()), LocalDateTime.now());
     };
 
     private static double parsePrice(String priceStr) {
