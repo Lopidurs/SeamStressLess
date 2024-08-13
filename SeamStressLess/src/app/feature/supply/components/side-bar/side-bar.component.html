@@ -10,5 +10,20 @@
         <mat-card-content>{{ supplyCategory.name }}</mat-card-content>
       </mat-card>
     }
+    <mat-card appearance="outlined" class="side-nav-item">
+      @if (isAdding) {
+        <mat-card-content class="new-category-input">
+          <mat-form-field appearance="fill">
+            <mat-label>Nouvelle catégorie</mat-label>
+            <input matInput [(ngModel)]="newCategoryName" placeholder="Nom de la catégorie">
+          </mat-form-field>
+          <button mat-icon-button (click)="addNewCategory()">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-card-content>
+      } @else {
+        <mat-card-content class="center" (click)="startAddingCategory()">+</mat-card-content>
+      }
+    </mat-card>
   </mat-card-content>
 </mat-card>

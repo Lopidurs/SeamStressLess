@@ -3,7 +3,8 @@ export const API_ENDPOINTS = {
     BY_CATEGORY: '/supplies',
     GET_ALL: '/supplies',
     CATEGORIES: {
-      GET_ALL: '/supplies/categories',
+      GET_ALL: '/supply-category',
+      POST: '/supply-category',
     },
   }
 }
