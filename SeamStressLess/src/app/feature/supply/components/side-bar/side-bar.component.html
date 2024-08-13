@@ -1,7 +1,12 @@
 <mat-card class="side-nav">
   <mat-card-content class="side-nav-content">
-    @for (supplyCategory of supplyCategories$ | async ; track supplyCategory.id ) {
-      <mat-card appearance="outlined" class="side-nav-item">
+    @for (supplyCategory of supplyCategories$ | async; track supplyCategory.id) {
+      <mat-card
+        appearance="outlined"
+        class="side-nav-item"
+        [class.selected]="selectedCategoryId === supplyCategory.id"
+        (click)="selectCategory(supplyCategory.id)"
+      >
         <mat-card-content>{{ supplyCategory.name }}</mat-card-content>
       </mat-card>
     }

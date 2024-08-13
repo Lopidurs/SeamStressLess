@@ -9,10 +9,16 @@
 
     .side-nav-item {
       cursor: pointer;
-    }
+      transition: background-color 0.3s ease;
 
-    .side-nav-item:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      &.selected {
+        background-color: rgba(0, 0, 0, 0.3);
+        font-weight: bold;
+      }
     }
   }
 }

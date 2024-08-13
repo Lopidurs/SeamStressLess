@@ -1,7 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SupplyService} from "../../service/supply.service";
 import {Observable} from "rxjs";
-import {SupplyCategory} from "../../models/SupplyCategory";
 import {Supply} from "../../models/Supply";
 import {SupplyCardComponent} from "../supply-card/supply-card.component";
 import {AsyncPipe} from "@angular/common";
@@ -16,13 +15,9 @@ import {AsyncPipe} from "@angular/common";
   templateUrl: './supply-list.component.html',
   styleUrl: './supply-list.component.scss'
 })
-export class SupplyListComponent implements OnInit {
-  private readonly supplyService: SupplyService = inject(SupplyService);
+export class SupplyListComponent {
 
-  protected supplies$!: Observable<Supply[]>;
+  @Input() supplies$!: Observable<Supply[]>;
 
-  ngOnInit() {
-    this.supplies$ = this.supplyService.getSuppliesByCategory(1);
-  };
 
 }

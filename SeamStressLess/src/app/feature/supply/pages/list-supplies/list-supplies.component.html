@@ -1,2 +1,2 @@
-<app-side-bar />
-<app-supply-list />
+<app-side-bar (selectedCategory)="selectCategory($event)"/>
+<app-supply-list [supplies$]="supplies$" />
