@@ -26,7 +26,8 @@ public class PriceRecordInit implements CommandLineRunner {
 
         List<PriceRecord> priceRecords = List.of(
                 new PriceRecord(10.0, LocalDateTime.parse("2024-08-08T12:31:21.462603"), supplies.get(0)),
-                new PriceRecord(20.0, LocalDateTime.parse("2024-08-08T12:31:21.462603"), supplies.get(1))
+                new PriceRecord(20.0, LocalDateTime.parse("2024-08-08T12:31:21.462603"), supplies.get(1)),
+                new PriceRecord(30.0, LocalDateTime.parse("2024-08-08T12:31:21.462603"), supplies.get(2))
         );
 
         priceRecordRepo.saveAll(priceRecords);
