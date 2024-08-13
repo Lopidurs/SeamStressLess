@@ -1,7 +1,7 @@
 .side-nav {
   width: 250px;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #ebe4dc;
   border-radius: 0;
 
   .side-nav-content {
@@ -12,12 +12,11 @@
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: #e5dbd0;
       }
 
       &.selected {
-        background-color: rgba(0, 0, 0, 0.3);
-        font-weight: bold;
+        background-color: #dfd3c5;
       }
     }
   }
