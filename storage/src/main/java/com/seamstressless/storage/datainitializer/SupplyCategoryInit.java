@@ -22,7 +22,7 @@ public class SupplyCategoryInit implements CommandLineRunner {
         List<SupplyCategory> productCategories = List.of(
                 new SupplyCategory("Calicot blanc"),
                 new SupplyCategory("Cotton rouge"),
-                new SupplyCategory("Cottton bleu"),
+                new SupplyCategory("Cotton bleu"),
                 new SupplyCategory("Tirettes")
         );
 

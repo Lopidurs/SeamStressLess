@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+SC");
+
+.titre{
+  text-align: center;
+  margin-top: 20vh;
+  margin-bottom: 55vh;
+}
+.titre svg{
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  animation: 2s linear 2s apparition;
+  animation-fill-mode: forwards;
+}
+.titre h1{
+  font-family: "Cormorant SC",sans-serif;
+  font-weight: bold;
+  font-size: 130px;
+  text-align: center;
+  color: #A4AA3C;
+}
+.rectangle{
+  width  : 80%;
+  height : 6px;
+  background-color: #A4AA3C;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  animation: 1.5s linear slidein;
+}
+
+@keyframes slidein {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes apparition {
+  0% { opacity: 0; }
+  100%   { opacity: 1; }
+}
+
+@media only screen and (max-width: 1100px) {
+  .titre h1{
+    font-size: 100px;
+  }
+}
