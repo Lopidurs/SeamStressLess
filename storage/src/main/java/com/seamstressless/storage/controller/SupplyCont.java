@@ -18,16 +18,10 @@ import java.util.List;
 public class SupplyCont {
 
     private final ISupply supplyService;
-    private final ISupplyCategory supplyCategoryService;
 
     @GetMapping
     public List<SupplyRes> getAllSupplies() {
         return supplyService.getAllSupplies();
-    }
-
-    @GetMapping("/categories")
-    public List<SupplyCategoryRes> getAllSupplyCategories() {
-        return supplyCategoryService.getAllSupplyCategories();
     }
 
     @GetMapping("/{categoryId}")

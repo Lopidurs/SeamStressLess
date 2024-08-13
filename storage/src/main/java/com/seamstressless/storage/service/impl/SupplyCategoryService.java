@@ -2,6 +2,7 @@ package com.seamstressless.storage.service.impl;
 
 import com.seamstressless.storage.repository.SupplyCategoryRepo;
 import com.seamstressless.storage.service.ISupplyCategory;
+import com.seamstressless.storage.utils.dto.SupplyCategory.SupplyCategoryReq;
 import com.seamstressless.storage.utils.dto.SupplyCategory.SupplyCategoryRes;
 import com.seamstressless.storage.utils.mapper.SupplyCategoryMapper;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,11 @@ public class SupplyCategoryService implements ISupplyCategory {
         return supplyCategoryRepo.findAll().stream()
                 .map(SupplyCategoryMapper::fromEntity)
                 .toList();
+    }
+
+    public SupplyCategoryRes addSupplyCategory(SupplyCategoryReq supplyCategoryReq) {
+        return SupplyCategoryMapper.fromEntity(
+                supplyCategoryRepo.save(SupplyCategoryMapper.toEntity(supplyCategoryReq))
+        );
     }
 }
