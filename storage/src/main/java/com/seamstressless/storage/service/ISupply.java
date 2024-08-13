@@ -1,5 +1,6 @@
 package com.seamstressless.storage.service;
 
+import com.seamstressless.storage.utils.dto.Supply.SupplyReq;
 import com.seamstressless.storage.utils.dto.Supply.SupplyRes;
 
 import java.util.List;
@@ -21,4 +22,11 @@ public interface ISupply {
      * @return list of supplies
      */
     List<SupplyRes> getAllSuppliesByCategory(Long categoryId);
+
+    /**
+     * Add a new supply
+     * @param supplyReq supply to create
+     * @return created supply
+     */
+    SupplyRes addSupply(SupplyReq supplyReq);
 }

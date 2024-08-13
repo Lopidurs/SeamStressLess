@@ -4,6 +4,7 @@ import com.seamstressless.storage.domain.entities.PriceRecord;
 import com.seamstressless.storage.domain.entities.Supply;
 import com.seamstressless.storage.repository.PriceRecordRepo;
 import com.seamstressless.storage.repository.SupplyCategoryRepo;
+import com.seamstressless.storage.utils.dto.Supply.SupplyReq;
 import com.seamstressless.storage.utils.dto.Supply.SupplyRes;
 import com.seamstressless.storage.repository.SupplyRepo;
 import com.seamstressless.storage.service.ISupply;
@@ -33,6 +34,12 @@ public class SupplyService implements ISupply {
     public List<SupplyRes> getAllSuppliesByCategory(Long categoryId) {
         List<Supply> supplies = supplyRepo.findAllByCategory(categoryId);
         return getSuppliesWithLastPrice(supplies);
+    }
+
+    @Override
+    public SupplyRes addSupply(SupplyReq supplyReq) {
+        Supply supply = supplyRepo.save(supplyMapper.toEntity(supplyReq));
+        return SupplyMapper.fromEntity(supply, null);
     }
 
     private List<SupplyRes> getSuppliesWithLastPrice(List<Supply> supplies) {
