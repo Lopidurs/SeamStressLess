@@ -1,12 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {Supply} from "../../models/Supply";
 import {MatCardModule} from "@angular/material/card";
+import {LastPriceDisplayPipe} from "../../pipes/lastPriceDisplay.pipe";
 
 @Component({
   selector: 'app-supply-card',
   standalone: true,
   imports: [
-    MatCardModule
+    MatCardModule,
+    LastPriceDisplayPipe
   ],
   templateUrl: './supply-card.component.html',
   styleUrl: './supply-card.component.scss'

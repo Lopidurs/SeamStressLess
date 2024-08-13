@@ -2,7 +2,7 @@
   <mat-card class="card">
     <mat-card-content>
       <a href="{{ supply.URL}}">{{ supply.storeName }}</a>
-      <p>{{ supply.lastPrice }}€</p>
+      <p>{{ supply.lastPrice | lastPriceDisplay }}€</p>
     </mat-card-content>
   </mat-card>
 }
