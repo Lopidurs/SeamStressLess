@@ -51,9 +51,8 @@ export class SideBarComponent implements OnInit {
   addNewCategory() {
     if (this.newCategoryName.trim()) {
       this.supplyService.postSupplyCategory(this.newCategoryName.trim()).subscribe({
-        next: (newCategory) => {
-          console.log('Nouvelle catégorie ajoutée:', newCategory);
-          this.supplyCategories$ = this.supplyService.getSuppliesCategory(); // Rafraîchir la liste
+        next: () => {
+          this.supplyCategories$ = this.supplyService.getSuppliesCategory();
         },
         error: (error) => console.error('Erreur lors de l\'ajout de la catégorie:', error)
       });

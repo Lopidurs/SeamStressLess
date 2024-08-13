@@ -1,0 +1,34 @@
+<mat-card class="supply-form-card">
+  <mat-card-header>
+    <mat-card-title>Nouveau Supply</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="supplyForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Catégories</mat-label>
+        <mat-select formControlName="categoryId">
+          @for (category of categories$ | async ; track category.id) {
+            <mat-option [value]="category.id">{{category.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nom du site</mat-label>
+        <input matInput formControlName="storeName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>URL du site</mat-label>
+        <input matInput formControlName="URL">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>XPath</mat-label>
+        <input matInput formControlName="xPathPrice">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="supplyForm.invalid">Soumettre</button>
+    </form>
+  </mat-card-content>
+</mat-card>

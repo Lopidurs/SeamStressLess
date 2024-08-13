@@ -8,3 +8,10 @@ export interface Supply {
   Category: SupplyCategory;
   lastPrice: number;
 }
+
+export interface SupplyPost {
+  URL: string;
+  storeName: string;
+  XPathPrice: string;
+  categoryId: number;
+}
