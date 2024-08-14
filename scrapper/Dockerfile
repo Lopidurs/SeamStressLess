@@ -1,23 +1,38 @@
-FROM maven:3.9.7-amazoncorretto-21 AS build
+FROM maven:3.9.7-amazoncorretto-21 AS builder-storage
+WORKDIR /app/storage
 
-WORKDIR /app
+# Copier les fichiers nécessaires pour le build
+COPY ./storage/pom.xml ./
+COPY ./storage/src ./src
 
-ARG PROFILE=prod
-
-COPY pom.xml .
-
+# Compiler et installer le projet storage dans le dépôt local Maven
 RUN mvn clean install -DskipTests
 
-FROM amazoncorretto:21 AS deploy
+# Étape 2 : Compiler le projet scrapper
+FROM maven:3.9.7-amazoncorretto-21  AS builder-scrapper
+WORKDIR /app/scrapper
 
-ARG DEPENDENCY=/app/controller/target
+# Copier le pom.xml du projet scrapper
+COPY ./scrapper/pom.xml ./
 
-ARG JAR_NAME="controller-0.0.1-SNAPSHOT"
+# Copier le code source du projet scrapper
+COPY ./scrapper/src ./src
 
-ARG PORT=8080
+# Copier le dépôt local de l'étape précédente pour inclure storage
+COPY --from=builder-storage /root/.m2 /root/.m2
 
-COPY --from=build ${DEPENDENCY}/${JAR_NAME}.jar app.jar
+# Compiler le projet scrapper
+RUN mvn clean package -DskipTests
 
-EXPOSE ${PORT}
+# Étape 3 : Construire l'image finale
+FROM maven:3.9.7-amazoncorretto-21
+WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Copier le fichier JAR du projet scrapper depuis l'étape précédente
+COPY --from=builder-scrapper /app/scrapper/target/scrapper.jar /app/scrapper.jar
+
+# Exposer le port sur lequel l'application tourne
+EXPOSE 8080
+
+# Démarrer l'application
+CMD ["java", "-jar", "/app/scrapper.jar"]

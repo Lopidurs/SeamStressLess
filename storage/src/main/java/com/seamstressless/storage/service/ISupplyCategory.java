@@ -16,6 +16,13 @@ public interface ISupplyCategory {
     List<SupplyCategoryRes> getAllSupplyCategories();
 
     /**
+     * Get a supply category by id
+     * @param id supply category id
+     * @return supply category
+     */
+    SupplyCategoryRes getSupplyCategory(Long id);
+
+    /**
      * Add a new supply category
      * @param supplyCategoryReq supply category to create
      * @return created supply category

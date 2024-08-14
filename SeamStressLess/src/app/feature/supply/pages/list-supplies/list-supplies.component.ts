@@ -20,8 +20,9 @@ export class ListSuppliesComponent {
   private readonly supplyService: SupplyService = inject(SupplyService);
 
   protected supplies$!: Observable<Supply[]>;
-
+  selectedCategory!:number;
   selectCategory($event: number) {
     this.supplies$ = this.supplyService.getSuppliesByCategory($event);
+    this.selectedCategory = $event;
   }
 }

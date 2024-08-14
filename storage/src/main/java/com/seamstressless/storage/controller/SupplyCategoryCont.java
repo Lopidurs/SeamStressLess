@@ -21,6 +21,11 @@ public class SupplyCategoryCont {
         return supplyCategoryService.getAllSupplyCategories();
     }
 
+    @GetMapping("/{id}")
+    public SupplyCategoryRes getSupplyCategory(@PathVariable Long id) {
+        return supplyCategoryService.getSupplyCategory(id);
+    }
+
     @PostMapping()
     public SupplyCategoryRes addSupplyCategory(@RequestBody @Valid SupplyCategoryReq supplyCategoryReq) {
         return supplyCategoryService.addSupplyCategory(supplyCategoryReq);

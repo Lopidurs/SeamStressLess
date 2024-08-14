@@ -1,23 +1,30 @@
-FROM maven:3.9.7-amazoncorretto-21 AS build
+FROM maven:3.9.7-amazoncorretto-21 AS builder
 
 WORKDIR /app
 
-ARG PROFILE=prod
-
 COPY pom.xml .
+COPY src ./src
 
-RUN mvn clean install -DskipTests
+RUN mvn clean package -DskipTests
 
-FROM amazoncorretto:21 AS deploy
+FROM maven:3.9.7-amazoncorretto-21
 
-ARG DEPENDENCY=/app/controller/target
+WORKDIR /app
 
-ARG JAR_NAME="controller-0.0.1-SNAPSHOT"
+COPY --from=builder /app/target/storage-0.0.1-SNAPSHOT.jar /app/storage.jar
 
-ARG PORT=8080
+ENV ANGULAR_ALLOWED_ORIGINS=http://localhost:4200 \
+    DATABASE_DDL_AUTO=create \
+    DATABASE_DRIVER=org.postgresql.Driver \
+    DATABASE_FORMAT_SQL=true \
+    DATABASE_PASSWORD=postgres \
+    DATABASE_SHOW_SQL=true \
+    DATABASE_URL=jdbc:postgresql://localhost:5432/seamstressless \
+    DATABASE_USERNAME=postgres \
+    JWT_ALGORITHM=HmacSHA256 \
+    JWT_EXPIRE_AT=86400000 \
+    JWT_SECRET=TFTIC_LABO_SECRET_KEY_1234567890
 
-COPY --from=build ${DEPENDENCY}/${JAR_NAME}.jar app.jar
+EXPOSE 8080
 
-EXPOSE ${PORT}
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "/app/storage-service.jar"]

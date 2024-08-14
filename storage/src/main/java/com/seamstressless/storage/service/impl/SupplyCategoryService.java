@@ -21,6 +21,12 @@ public class SupplyCategoryService implements ISupplyCategory {
                 .toList();
     }
 
+    public SupplyCategoryRes getSupplyCategory(Long id) {
+        return SupplyCategoryMapper.fromEntity(
+                supplyCategoryRepo.findById(id).orElseThrow()
+        );
+    }
+
     public SupplyCategoryRes addSupplyCategory(SupplyCategoryReq supplyCategoryReq) {
         return SupplyCategoryMapper.fromEntity(
                 supplyCategoryRepo.save(SupplyCategoryMapper.toEntity(supplyCategoryReq))

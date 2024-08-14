@@ -1,4 +1,7 @@
 @for (supply of supplies$ | async ; track supply.id) {
   <app-supply-card [supply]="supply"/>
 }
-<button mat-flat-button routerLink="/new-supply">Nouvelle source</button>
+@if (selectedCategory) {
+  <button mat-flat-button (click)="navigateToNewSupply()">Nouvelle source</button>
+}
+

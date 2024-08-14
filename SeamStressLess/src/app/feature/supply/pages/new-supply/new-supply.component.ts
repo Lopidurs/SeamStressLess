@@ -9,7 +9,7 @@ import {SupplyCategory} from "../../models/SupplyCategory";
 import {SupplyService} from "../../service/supply.service";
 import {AsyncPipe} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-supply',
@@ -29,21 +29,22 @@ import {Router} from "@angular/router";
 })
 
 export class NewSupplyComponent implements OnInit {
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
   private readonly supplyService: SupplyService = inject(SupplyService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
 
-  supplyForm: FormGroup = this.fb.group({
-    URL: ['', [Validators.required, Validators.pattern('https?://.+')]],
-    storeName: ['', Validators.required],
-    xPathPrice: ['', Validators.required],
-    categoryId: ['', Validators.required],
-  });
-
-  categories$!: Observable<SupplyCategory[]>;
-
+  category$!: Observable<SupplyCategory>;
+  supplyForm!: FormGroup;
   ngOnInit() {
-    this.categories$ = this.supplyService.getSuppliesCategory();
+    const categoryId = this.route.snapshot.params['id'];
+    this.supplyForm = this.fb.group({
+      URL: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      storeName: ['', Validators.required],
+      xPathPrice: ['', Validators.required],
+      categoryId: [categoryId, Validators.required],
+    });
+    this.category$ = this.supplyService.getSupplyCategoryById(categoryId);
   }
 
   onSubmit() {

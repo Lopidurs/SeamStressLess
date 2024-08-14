@@ -14,6 +14,10 @@ export class SupplyService {
     return this.http.get<SupplyCategory[]>(`${API_ENDPOINTS.SUPPLY.CATEGORIES.GET_ALL}`)
   }
 
+  getSupplyCategoryById(categoryId: number) {
+    return this.http.get<SupplyCategory>(`${API_ENDPOINTS.SUPPLY.CATEGORIES.GET_BY_ID}/${categoryId}`)
+  }
+
   getSuppliesByCategory(categoryId: number) {
     return this.http.get<Supply[]>(`${API_ENDPOINTS.SUPPLY.BY_CATEGORY}/${categoryId}`)
   }
